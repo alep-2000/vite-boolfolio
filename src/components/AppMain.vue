@@ -62,7 +62,16 @@ export default {
                     <img :src="`${baseUrl}/storage/${post.cover_image}`" class="w-50">
                 </div>
                 <div class="card-body my-3">
-                    {{ truncateText(post.content) }}
+                    <p>
+                        <span v-if="post.types">{{ post.types.name }}</span>
+                        <span v-else>Tipologia non scelta</span>
+                    </p>
+                    <p v-if="post.tecnologies">
+                        <span class="badge text-bg-primary" v-for="tecnology in post.tecnologies" :key="tecnology.id">
+                            {{tecnology.name}}
+                        </span>
+                    </p>
+                    <p>{{ truncateText(post.content) }}</p>
                 </div>
             </div>
         </div>
