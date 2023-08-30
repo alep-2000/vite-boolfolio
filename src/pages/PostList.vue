@@ -48,7 +48,7 @@ export default {
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center text-secondary">Boolpress</h1>
+                <h1 class="text-center text-primary mb-5">Boolpress - POSTS</h1>
             </div>
         </div>
     </div>
