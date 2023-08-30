@@ -27,8 +27,8 @@ export default {
             axios.get(`${this.baseUrl}/api/posts`, { params: { page: num_page } }).then((response) => {
                 if (response.data.success) {
                     this.posts = response.data.results.data;
-                    this.currentPage = response.data.results.currentPage;
-                    this.lastPage = response.data.results.lastPage;
+                    this.currentPage = response.data.results.current_page;
+                    this.lastPage = response.data.results.last_page;
                     this.loading = false;
                 }
             })
@@ -76,7 +76,22 @@ export default {
                 </div>
             </div>
         </div>
-        
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <nav>
+                        <ul class="pagination"> 
+                            <li :class="currentPage === 1 ? 'disabled' : '' ">
+                                <button class="page-link" @click="getPosts(currentPage - 1)">Prev</button>
+                            </li>
+                            <li :class="currentPage === lastPage ? 'disabled' : '' ">
+                                <button class="page-link" @click="getPosts(currentPage + 1)">Next</button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
