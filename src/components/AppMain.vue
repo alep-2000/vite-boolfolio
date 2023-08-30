@@ -13,22 +13,23 @@ export default {
             baseUrl: 'http://127.0.0.1:8000',
             posts: [],
             loading: true,
-            maxNumChara: 150
+            maxNumChara: 150,
+            currentPage: 1,
+            lastPage: null
         }
     },
     created() {
-        this.getPosts();
+        this.getPosts(1);
     },
     methods: {
-        getPosts() {
+        getPosts(num_page) {
             this.loading = true;
-            axios.get(`${this.baseUrl}/api/posts`).then((response) => {
+            axios.get(`${this.baseUrl}/api/posts`, { params: { page: num_page } }).then((response) => {
                 if (response.data.success) {
-                    this.posts = response.data.results;
+                    this.posts = response.data.results.data;
+                    this.currentPage = response.data.results.currentPage;
+                    this.lastPage = response.data.results.lastPage;
                     this.loading = false;
-                }
-                else {
-
                 }
             })
         },
@@ -75,6 +76,7 @@ export default {
                 </div>
             </div>
         </div>
+        
     </div>
 </template>
 
