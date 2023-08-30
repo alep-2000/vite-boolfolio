@@ -1,19 +1,20 @@
 <script>
 import axios from 'axios';
+import { store } from '../store.js';
 import AppLoader from '../components/AppLoader.vue';
+import AppCard from '../components/AppCard.vue'
 
 
 export default {
     name: 'PostList',
     components: {
-        AppLoader
+        AppLoader,
+        AppCard
     },
     data() {
         return {
-            baseUrl: 'http://127.0.0.1:8000',
+            store,
             posts: [],
-            loading: true,
-            maxNumChara: 150,
             currentPage: 1,
             lastPage: null
         }
@@ -23,22 +24,15 @@ export default {
     },
     methods: {
         getPosts(num_page) {
-            this.loading = true;
-            axios.get(`${this.baseUrl}/api/posts`, { params: { page: num_page } }).then((response) => {
+            this.store.loading = true;
+            axios.get(`${this.store.baseUrl}/api/posts`, { params: { page: num_page } }).then((response) => {
                 if (response.data.success) {
                     this.posts = response.data.results.data;
                     this.currentPage = response.data.results.current_page;
                     this.lastPage = response.data.results.last_page;
-                    this.loading = false;
+                    this.store.loading = false;
                 }
             })
-        },
-        truncateText(text) {
-            if (text.length > this.maxNumChara) {
-                return text.substr(0, this.maxNumChara) + '...';
-            }
-
-            return text;
         }
     }
 }
@@ -56,24 +50,7 @@ export default {
     <div v-else class="container">
         <div class="row">
             <div class="col-12 col-md-4" v-for="post in posts" :key="post.id">
-                <div class="card-header my-3">
-                    {{ post.title }}
-                </div>
-                <div class="card-image-top my-3">
-                    <img :src="`${baseUrl}/storage/${post.cover_image}`" class="w-50">
-                </div>
-                <div class="card-body my-3">
-                    <p>
-                        <span v-if="post.types">{{ post.types.name }}</span>
-                        <span v-else>Tipologia non scelta</span>
-                    </p>
-                    <p v-if="post.tecnologies">
-                        <span class="badge text-bg-primary" v-for="tecnology in post.tecnologies" :key="tecnology.id">
-                            {{tecnology.name}}
-                        </span>
-                    </p>
-                    <p>{{ truncateText(post.content) }}</p>
-                </div>
+                <AppCard :post="post"/>
             </div>
         </div>
         <div class="row">
