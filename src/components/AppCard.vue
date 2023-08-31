@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store.js'
 export default {
     name: 'AppCard',
     props: {
@@ -6,6 +7,7 @@ export default {
     },
     data() {
         return {
+            store,
             maxNumChara: 150,
         }
     },
@@ -26,7 +28,7 @@ export default {
             {{ post.title }}
         </div>
         <div class="card-image-top my-3">
-            <img :src="`${baseUrl}/storage/${post.cover_image}`" class="w-50">
+            <img :src="`${this.store.baseUrl}/storage/${post.cover_image}`" class="w-50">
         </div>
         <div class="card-body my-3">
             <p>
@@ -39,6 +41,9 @@ export default {
                 </span>
             </p>
             <p>{{ truncateText(post.content) }}</p>
+        </div>
+        <div class="card-footer">
+            <router-link class="btn btn-sm btn-primary" :to=" { name: 'single-post', params: { slug: post.slug }}">Leggi l'articolo</router-link>
         </div>
 </template>
 

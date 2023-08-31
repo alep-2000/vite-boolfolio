@@ -46,7 +46,7 @@ export default {
             </div>
         </div>
     </div>
-    <AppLoader v-if="loading"/>
+    <AppLoader v-if="store.loading"/>
     <div v-else class="container">
         <div class="row">
             <div class="col-12 col-md-4" v-for="post in posts" :key="post.id">
