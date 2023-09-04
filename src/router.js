@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage.vue';
 import PostList from './pages/PostList.vue';
 import SinglePost from './pages/SinglePost.vue';
 import NotFound from './pages/NotFound.vue';
+import ContactUs from './pages/ContactUs.vue';
+import ThankYou from './pages/ThankYou.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -22,6 +24,16 @@ const router = createRouter({
             path: '/posts/:slug',
             name: 'single-post',
             component: SinglePost
+        },
+        {
+            path: '/contact-us',
+            name: 'contact-us',
+            component: ContactUs
+        },
+        {
+            path: '/thank-you',
+            name: 'thank-you',
+            component: ThankYou
         },
         {
             path: '/pagina-non-trovata',

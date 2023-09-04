@@ -11,7 +11,11 @@ export default {
                 {
                     label: 'Posts',
                     routeName: 'posts'
-                }
+                },
+                {
+                    label: 'Contact Us',
+                    routeName: 'contact-us'
+                },
             ]
         }
     }
