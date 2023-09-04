@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         sendForm() {
-            this.store.loading = true;
+            this.loading = true;
             const data = {
                 name: this.name,
                 email: this.email,
@@ -43,9 +43,10 @@ export default {
                     this.email = '';
                     this.content = '';
 
-                    this.store.loading = false;
+                    this.loading = false;
 
                     this.$router.push({ name: 'thank-you' });
+
 
                 }
             });
@@ -87,7 +88,7 @@ export default {
                             </p>
                         </div>
                         <div class="col-12 mt-3">
-                            <button class="btn btn-sm btn-success" type="submit" :disabled="store.loading">{{ store.loading ? 'Sending email in progress' : 'Sending' }}</button>
+                            <button class="btn btn-sm btn-success" type="submit" :disabled="loading">{{ loading ? 'Sending email in progress' : 'Sending' }}</button>
                         </div>
                     </form>
                 </div>
